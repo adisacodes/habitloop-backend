@@ -1,6 +1,19 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, generics
+from django.contrib.auth.models import User
 from .models import HabitCategory, Habit, HabitLog, Reminder
-from .serializers import HabitCategorySerializer, HabitSerializer, HabitLogSerializer, ReminderSerializer
+from .serializers import (
+    HabitCategorySerializer,
+    HabitSerializer,
+    HabitLogSerializer,
+    ReminderSerializer,
+    RegisterSerializer,
+)
+
+
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [permissions.AllowAny]
 
 
 class HabitCategoryViewSet(viewsets.ModelViewSet):
