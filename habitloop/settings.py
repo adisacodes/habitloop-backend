@@ -85,16 +85,15 @@ WSGI_APPLICATION = 'habitloop.wsgi.application'
 
 import os
 
+import dj_database_url
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'habitloop'),
-        'USER': os.environ.get('POSTGRES_USER', 'habitloop_user'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'habitloop_pass'),
-        'HOST': os.environ.get('POSTGRES_HOST', 'db'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
-    }
+    'default': dj_database_url.config(
+        default=f"postgresql://{os.environ.get('POSTGRES_USER', 'habitloop_user')}:{os.environ.get('POSTGRES_PASSWORD', 'habitloop_pass')}@{os.environ.get('POSTGRES_HOST', 'db')}:{os.environ.get('POSTGRES_PORT', '5432')}/{os.environ.get('POSTGRES_DB', 'habitloop')}"
+    )
 }
+
+
 
 
 
