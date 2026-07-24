@@ -145,6 +145,7 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5174",
+    "https://habitloop-frontend-production.up.railway.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
