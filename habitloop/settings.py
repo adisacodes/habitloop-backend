@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,12 +44,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     'corsheaders',
     'habits',
-
 ]
-
-
-
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -83,19 +80,11 @@ WSGI_APPLICATION = 'habitloop.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-import os
-
-import dj_database_url
-
 DATABASES = {
     'default': dj_database_url.config(
         default=f"postgresql://{os.environ.get('POSTGRES_USER', 'habitloop_user')}:{os.environ.get('POSTGRES_PASSWORD', 'habitloop_pass')}@{os.environ.get('POSTGRES_HOST', 'db')}:{os.environ.get('POSTGRES_PORT', '5432')}/{os.environ.get('POSTGRES_DB', 'habitloop')}"
     )
 }
-
-
-
-
 
 
 # Password validation
@@ -153,15 +142,9 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
 }
 
-
-
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5174",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
-
-
-
